@@ -1,5 +1,3 @@
-using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -16,7 +14,6 @@ namespace Installers.Scenes
         private void Awake()
         {
             SceneManager.LoadScene(MainSceneBuildIndex);
-
         }
     }
 }
