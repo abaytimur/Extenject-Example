@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using Events.Internal;
+using Zenject;
 
 namespace Installers.Prefabs
 {
@@ -6,6 +7,7 @@ namespace Installers.Prefabs
     {
         public override void InstallBindings()
         {
+            Container.Bind<EnemyInternalEvents>().AsSingle();
         }
     }
 }

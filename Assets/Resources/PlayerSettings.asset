@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerSettings
   m_EditorClassIdentifier: 
   playerCameraControllerSettings:
-    cameraOffset: {x: 0, y: 5, z: -3}
+    cameraOffset: {x: 0, y: 10, z: -5}

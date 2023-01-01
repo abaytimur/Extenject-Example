@@ -9,15 +9,16 @@ namespace Components.Enemies
     public class EnemyCollisionDetector : MonoBehaviour, IAttackable
     {
         private int _enemyHits = 2;
-        [UsedImplicitly] [Inject] private EnemyInternalEvents EnemyInternalEvents { get; set; }
+        [Inject] private EnemyInternalEvents EnemyInternalEvents { get; set; }
 
         EnemyInternalEvents IAttackable.OnWeaponTriggerEnter()
         {
             _enemyHits--;
-            if (_enemyHits ==0 )
+            if (_enemyHits == 0)
             {
-                OnDeath?.Invoke(this); 
+                OnDeath?.Invoke(this);
             }
+
             return EnemyInternalEvents;
         }
 
