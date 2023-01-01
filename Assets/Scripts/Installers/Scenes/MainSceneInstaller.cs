@@ -8,6 +8,7 @@ namespace Installers.Scenes
         public override void InstallBindings()
         {
             Container.Bind<MainSceneInputEvents>().AsSingle();
+            Container.Bind<PlayerEvents>().AsSingle();
         }
     }
 }

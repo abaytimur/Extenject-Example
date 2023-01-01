@@ -7,14 +7,15 @@ namespace Extensions.Unity
 {
     public class RoutineHelper
     {
+        public event UnityAction OnEnded;
+        public bool IsInvoking { get; private set; }
+        
         private readonly Action _invokeFunc;
         private readonly YieldInstruction _wait;
         private Coroutine _myRoutine;
         private readonly MonoBehaviour _myInvokingMono;
         private readonly Func<bool> _whileCond;
         private bool _isStopped;
-        public event UnityAction OnEnded;
-
         private bool _isPaused;
 
         public RoutineHelper
@@ -36,6 +37,7 @@ namespace Extensions.Unity
             _isStopped = false;
             if (_myRoutine == null)
             {
+                IsInvoking= true;
                 _myRoutine = _myInvokingMono.StartCoroutine(InvokingRoutine());
             }
         }
@@ -45,6 +47,7 @@ namespace Extensions.Unity
             _isStopped = true;
             if (_myRoutine != null)
             {
+                IsInvoking = false;
                 _myInvokingMono.StopCoroutine(_myRoutine);
                 _myRoutine = null;
                 OnEnded?.Invoke();

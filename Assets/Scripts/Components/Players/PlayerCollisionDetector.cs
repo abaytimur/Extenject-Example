@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using Components.Enemies;
 using UnityEngine;
 
@@ -6,31 +6,23 @@ namespace Components.Players
 {
     public class PlayerCollisionDetector : MonoBehaviour
     {
-        private IAttackable _lastAttackedTarget;
+        private readonly List<IAttackable> _attackedTargets = new();
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IAttackable attackable))
             {
-                if (_lastAttackedTarget != attackable)
-                {
-                    if (_lastAttackedTarget is not null)
-                    {
-                        _lastAttackedTarget.OnDeath -= OnAttackedDeath;
-                    }
-
-                    attackable.OnDeath += OnAttackedDeath;
-                }
-
+                _attackedTargets.Add(attackable);
+                attackable.OnDeath += OnAttackedDeath;
 
                 attackable.OnWeaponTriggerEnter();
-
-                _lastAttackedTarget = attackable;
             }
         }
 
-        private void OnAttackedDeath()
+        private void OnAttackedDeath(IAttackable diedAttackable)
         {
+            diedAttackable.OnDeath -= OnAttackedDeath;
+            _attackedTargets.Remove(diedAttackable);
             Debug.LogWarning("Target Died");
         }
     }

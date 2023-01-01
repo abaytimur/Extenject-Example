@@ -16,11 +16,11 @@ namespace Components.Enemies
             _enemyHits--;
             if (_enemyHits ==0 )
             {
-                OnDeath?.Invoke(); 
+                OnDeath?.Invoke(this); 
             }
             return EnemyInternalEvents;
         }
 
-        public UnityAction OnDeath { get; set; }
+        public UnityAction<IAttackable> OnDeath { get; set; }
     }
 }
