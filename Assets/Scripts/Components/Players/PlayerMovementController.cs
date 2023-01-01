@@ -29,7 +29,7 @@ namespace Components.Players
 
         private void OnInputUpdate(MainSceneInputEvents.InputUpdate inputUpdate)
         {
-            Debug.LogWarning(MethodBase.GetCurrentMethod().Name);
+            // Debug.LogWarning(MethodBase.GetCurrentMethod().Name);
             navMeshAgent.destination = inputUpdate.TerrainPosition;
         }
 
